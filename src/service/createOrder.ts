@@ -8,7 +8,7 @@ interface iCreateOrder extends Token {
         value: string
     }
 }
-export async function CreateOrder(res: iCreateOrder): Promise<Token> {
+export async function CreateOrder(res: iCreateOrder): Promise<{ id: string, status: string }> {
 
     const res2 = await axios({
         url: process.env.CHECKOUTPAYPAL,
@@ -38,16 +38,16 @@ export async function CreateOrder(res: iCreateOrder): Promise<Token> {
                                     quantity: 1,
                                     unit_amount: {
                                         currency_code: 'USD',
-                                        value: '100.00'
+                                        value: res.CreateOrderReq.value
                                     }
                                 }
                             ], amount: {
                                 currency_code: 'USD',
-                                value: '100.00',
+                                value: res.CreateOrderReq.value,
                                 breakdown: {
                                     item_total: {
                                         currency_code: 'USD',
-                                        value: '100.00'
+                                        value: res.CreateOrderReq.value
                                     }
                                 }
                             }

@@ -12,7 +12,5 @@ export default async function CheckOutPage({
     const id = (await searchParams).token
     const order = await OderDetail({ ...token, idOrder: id })
     const s = await ConfirmPayment({ ...token, id: id })
-    console.log(s);
-
     return <div>{JSON.stringify(s)}</div>
 }
